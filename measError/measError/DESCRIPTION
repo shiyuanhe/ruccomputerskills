@@ -1,0 +1,13 @@
+Package: measError
+Type: Package
+Title: Measurement error correction 
+Version: 1.0
+Date: 2017-11-21
+Author: Shiyuan He
+Maintainer: Shiyuan He <heshiyuan@ruc.edu.cn>
+Description: Measurement error correction for simple linear model
+License: GNU GPLv3
+Imports: Rcpp (>= 0.12.12)
+LinkingTo: Rcpp, RcppArmadillo
+RoxygenNote: 6.0.1
+Suggests: testthat
