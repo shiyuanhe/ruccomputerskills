@@ -6,6 +6,7 @@
 #' @param D the the response vector
 #' @param W the the predictor vector
 #' @return the estamated regression coefficients
+#' @export 
 naiveRegression <- function(D, W) {
     .Call('_measError_naiveRegression', PACKAGE = 'measError', D, W)
 }
@@ -28,6 +29,7 @@ naiveRegression <- function(D, W) {
 #' simuData = getData(n, beta0, beta1, sigmaU, sigmaQ, sigmaE)
 #' (betaHat1 = naiveRegression(simuData$D, simuData$W))
 #' (betaHat2 = correctedRegression(simuData$D, simuData$W, sigmaU))
+#' @export 
 correctedRegression <- function(D, W, sigmaU) {
     .Call('_measError_correctedRegression', PACKAGE = 'measError', D, W, sigmaU)
 }

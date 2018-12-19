@@ -2,7 +2,7 @@
 % Please edit documentation in R/sampleData.R
 \name{getData}
 \alias{getData}
-\title{get simulation data}
+\title{Get simulation data}
 \usage{
 getData(n, beta0, beta1, sigmaU, sigmaQ, sigmaE)
 }
@@ -23,5 +23,5 @@ getData(n, beta0, beta1, sigmaU, sigmaQ, sigmaE)
 the generated data as a data frame
 }
 \description{
-get simulation data
+Get simulation data
 }

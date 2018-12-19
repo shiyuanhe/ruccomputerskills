@@ -6,7 +6,6 @@
 
 using namespace arma;
 
-#pragma omp declare simd 
 inline double squaredExp(const vec & x1, 
                          const vec & x2){
     double val;
@@ -17,17 +16,17 @@ inline double squaredExp(const vec & x1,
 
 
 // [[Rcpp::export()]]
-mat computeCov(const mat X) {
-    const int N = X.n_cols;
+mat computeCov( mat X) {
+    int N = X.n_cols;
     int i,j;
     // containers
     arma::mat covMat(N, N) ;
-
+    
     // algorithm
     for (i = 0 ; i < N ; i++){
-        for(j = i; j < N; j++){
+        for(j = 0; j < N; j++){
             covMat(i,j) = squaredExp(X.col(i), X.col(j));
-            covMat(j,i) = covMat(i,j);
+            //covMat(j,i) = covMat(i,j);
         }
     }
     
@@ -37,15 +36,15 @@ mat computeCov(const mat X) {
 
 
 // [[Rcpp::export()]]
-mat computeCov_parallel(const mat X) {
-    const int N = X.n_cols;
+mat computeCov_parallel(mat X) {
+    int N = X.n_cols;
     int i,j;
     // containers
     arma::mat covMat(N, N) ;
     
-#pragma omp parallel for collapse(2)
+#pragma omp parallel for simd schedule(static) collapse(2)
     for (i = 0 ; i < N ; i++){
-        for(j = i; j < N; j++){
+        for(j = 0; j < N; j++){
             covMat(i,j) = squaredExp(X.col(i), X.col(j));
             covMat(j,i) = covMat(i,j);
         }
@@ -56,22 +55,3 @@ mat computeCov_parallel(const mat X) {
 }
 
 
-
-// [[Rcpp::export()]]
-mat computeCov_simd(const mat X) {
-    const int N = X.n_cols;
-    int i,j;
-    // containers
-    arma::mat covMat(N, N) ;
-    
-#pragma omp parallel for simd collapse(2)
-    for (i = 0 ; i < N ; i++){
-        for(j = i; j < N; j++){
-            covMat(i,j) = squaredExp(X.col(i), X.col(j));
-            covMat(j,i) = covMat(i,j);
-        }
-    }
-    
-    // returns
-    return covMat;
-}

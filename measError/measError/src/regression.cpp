@@ -7,6 +7,7 @@ using namespace arma;
 //' @param D the the response vector
 //' @param W the the predictor vector
 //' @return the estamated regression coefficients
+//' @export 
 // [[Rcpp::export]]
 arma::vec naiveRegression(arma::vec D, arma::vec W){
     vec betaHat(2);
@@ -38,6 +39,7 @@ arma::vec naiveRegression(arma::vec D, arma::vec W){
 //' simuData = getData(n, beta0, beta1, sigmaU, sigmaQ, sigmaE)
 //' (betaHat1 = naiveRegression(simuData$D, simuData$W))
 //' (betaHat2 = correctedRegression(simuData$D, simuData$W, sigmaU))
+//' @export 
 // [[Rcpp::export]]
 arma::vec correctedRegression(arma::vec D, arma::vec W, arma::vec sigmaU){
     vec betaHat(2);
